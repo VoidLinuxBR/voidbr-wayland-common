@@ -1,3 +1,3 @@
-# voidbr-pkgfile
+# voidbr-wayland-common
 
-Template for VoidBR pkgmake/pkgfile packages
+VoidBR WAYLAND Meta Package

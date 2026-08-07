@@ -1,12 +1,12 @@
 # Maintainer: Vilmar Catafesta <vcatafesta@gmail.com>
 
-pkgname=voidbr-pkgname
-pkgdesc="Package template for VoidLinuxBR"
+pkgname=voidbr-wayland-common
+pkgdesc="VoidBR WAYLAND Meta Package"
 pkgver=$(date +%Y%m%d)
 pkgrel=$(date +%H%M)
-provides=()               # "eu SOU o $pkgname pkg1, pra quem depender deles"
-replaces=()               # "remove o pkg1 pkg2 antigo automaticamente quando eu instalar"
-conflicts=()              # "nunca me deixe coexistir com o pkg1 pkg2 original"
+provides=()  # "eu SOU o $pkgname pkg1, pra quem depender deles"
+replaces=()  # "remove o pkg1 pkg2 antigo automaticamente quando eu instalar"
+conflicts=() # "nunca me deixe coexistir com o pkg1 pkg2 original"
 arch=('any')
 license=('MIT')
 #url="ssh://git@github.com/voidlinuxbr/${pkgname}"
@@ -14,24 +14,49 @@ url="https://github.com/voidlinuxbr/${pkgname}"
 source=("git+${url}.git")
 md5sums=('SKIP')
 makedepends=()
-depends=()
+depends=(
+	chili-iso2usb          # Gravar ISO em pendrive (GUI)
+	voidbr-webapps
+	file-roller            # Gerenciador de compactados (GUI)
+	firefox                # Navegador Firefox
+	firefox-i18n-pt-BR     # Firefox em português (Brasil)
+	gparted                # Editor de partições (GUI)
+	kitty                  # Terminal (GUI)
+	mate-calc              # Calculadora (GUI)
+	mate-polkit            # Agente de autenticação (GUI)
+	mesa-demos             # Ferramentas de teste Mesa (inclui apps com janela)
+	mesa-dri               # Drivers gráficos DRI (biblioteca, X e Wayland)
+	mesa-vaapi             # Aceleração de vídeo VA-API (biblioteca, X e Wayland)
+	mpv                    # Player de vídeo (GUI)
+	network-manager-applet # Ícone de bandeja de rede (GUI)
+	octoxbps               # Gerenciador de pacotes (GUI)
+	pasystray              # Ícone de áudio (GUI)
+	pavucontrol            # Controlador de volume (GUI)
+	qt5-wayland            # QT5 - Wayland component
+	qt5ct                  # Qt5 Configuration Tool (GUI)
+	qt6-wayland            # QT6 - Wayland component
+	qt6ct                  # Qt6 Configuration Tool (GUI)
+	sddm                   # Display manager (Fluxbox, Hyprland, Sway, Mango)
+	voidbr-sddm-themes     # Temas do sddm VoidBR
+	voidbr-iso-writer      # Gravar ISO em pendrive (GUI)
+	xdg-desktop-portal     # Camada de comunicação apps/desktop
+	xdg-desktop-portal-gtk # Implementação GTK do portal XDG
+	xdg-user-dirs          # Gerenciamento de pastas do usuário
+	xdg-user-dirs-gtk      # GTK+ tool xdg-user-dirs
+	xdg-utils              # Integração com área de trabalho (scripts, X e Wayland)
+	xfce4-terminal         # Terminal (GUI)
+	xorg-server-xwayland   # Compatibilidade com apps X11 legados (infra Wayland)
+)
 backup=()
-
-# Automatically detect and use the correct install file
-if [ -e "${pkgname}.install" ]; then
-	install=${pkgname}.install
-elif [ -e "pkgbuild.install" ]; then
-	install=pkgfile.install
-fi
 
 package() {
 	# Verify default folder
-  if [ -d "${srcdir}/${pkgname}/${pkgname}" ]; then
+	if [ -d "${srcdir}/${pkgname}/${pkgname}" ]; then
 		InternalDir="${srcdir}/${pkgname}/${pkgname}"
-  elif [ -d "${srcdir}/${pkgname}" ]; then
+	elif [ -d "${srcdir}/${pkgname}" ]; then
 		InternalDir="${srcdir}/${pkgname}"
 	else
-    #local
+		#local
 		InternalDir="${WORKDIR}"
 	fi
 
