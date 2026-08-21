@@ -15,12 +15,13 @@ source=("git+${url}.git")
 md5sums=('SKIP')
 makedepends=()
 depends=(
-	qt5-wayland # QT5 - Wayland component
-	qt5ct       # Qt5 Configuration Tool (GUI)
-	qt6-wayland # QT6 - Wayland component
-	qt6ct       # Qt6 Configuration Tool (GUI)
-	weston
+	qt5-wayland          # QT5 - Wayland component
+	qt5ct                # Qt5 Configuration Tool (GUI)
+	qt6-wayland          # QT6 - Wayland component
+	qt6ct                # Qt6 Configuration Tool (GUI)
+	weston               # Reference implementation of a Wayland compositor
 	xorg-server-xwayland # Compatibilidade com apps X11 legados (infra Wayland)
+	wl-clipboard         # Wayland clipboard utilities
 )
 backup=()
 
