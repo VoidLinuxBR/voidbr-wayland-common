@@ -22,6 +22,8 @@ depends=(
 	weston               # Reference implementation of a Wayland compositor
 	xorg-server-xwayland # Compatibilidade com apps X11 legados (infra Wayland)
 	wl-clipboard         # Wayland clipboard utilities
+    wlroots              # Modular Wayland compositor library
+    seatd                # Minimal seat management daemon
 )
 backup=()
 
